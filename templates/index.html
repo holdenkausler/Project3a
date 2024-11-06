@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Price Chart</title>
+</head>
+<body>
+    <h1>Stock Price Chart Generator</h1>
+    <form method="POST">
+        <label>Stock Symbol:</label>
+        <select name="symbol" required>
+            {% for stock in stocks %}
+            <option value="{{ stock }}">{{ stock }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Chart Type:</label>
+        <select name="chart_type" required>
+            <option value="1">Bar</option>
+            <option value="2">Line</option>
+        </select><br><br>
+
+        <label>Time Series:</label>
+        <select name="time_series" required>
+            <option value="TIME_SERIES_INTRADAY">Intraday</option>
+            <option value="TIME_SERIES_DAILY">Daily</option>
+            <option value="TIME_SERIES_WEEKLY">Weekly</option>
+            <option value="TIME_SERIES_MONTHLY">Monthly</option>
+        </select><br><br>
+
+        <label>Start Date:</label>
+        <input type="date" name="start_date" required><br><br>
+
+        <label>End Date:</label>
+        <input type="date" name="end_date" required><br><br>
+
+        <button type="submit">Generate Chart</button>
+    </form>
+    
+    {% if chart_uri %}
+    <h2>{{ symbol }} Stock Prices Chart</h2>
+    <img src="{{ chart_uri }}" alt="Stock Chart">
+    {% endif %}
+</body>
+</html>
